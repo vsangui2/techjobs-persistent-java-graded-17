@@ -9,16 +9,6 @@ import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-//public class Employer extends AbstractEntity {
-//
-//    @NotBlank(message = "Location must not be blank")
-//    @Size(max=50, message = "Location cannot exceed 50 characters")
-//    private String location;
-//
-//    public Employer() {
-//    }
-//}
 
 @Entity
 public class Employer extends AbstractEntity {
@@ -50,4 +40,5 @@ public class Employer extends AbstractEntity {
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
+
 }

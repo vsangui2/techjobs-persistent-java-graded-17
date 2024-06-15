@@ -13,6 +13,7 @@ import static org.launchcode.techjobs.persistent.controllers.ListController.colu
 /**
  * Created by LaunchCode
  */
+
 @Controller
 @RequestMapping("search")
 public class SearchController {

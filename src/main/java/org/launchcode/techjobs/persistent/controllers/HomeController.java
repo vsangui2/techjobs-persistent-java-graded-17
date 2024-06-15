@@ -20,7 +20,7 @@ import java.util.Optional;
 /**
  * Created by LaunchCode
  */
-
+@RequestMapping("/")
 @Controller
 public class HomeController {
 
@@ -36,7 +36,7 @@ public class HomeController {
     @RequestMapping("")
     public String index(Model model) {
 
-        model.addAttribute("title", "My Jobs");
+        model.addAttribute("jobs", jobRepository.findAll());
         return "index";
     }
 
@@ -50,7 +50,8 @@ public class HomeController {
     }
     @PostMapping("add")
     public String processAddJobForm(@Valid @ModelAttribute Job newJob,
-                                    Errors errors, Model model, @RequestParam int employerId, @RequestParam (value = "", required = false) List<Integer> skills) {
+                                    Errors errors, Model model, @RequestParam int employerId,
+                                    @RequestParam (value = "", required = false) List<Integer> skills) {
         if (errors.hasErrors() || skills==null) {
             model.addAttribute("title", "Add Job");
             model.addAttribute("employers", employerRepository.findAll());
@@ -65,18 +66,17 @@ public class HomeController {
         return "redirect:";
     }
 
-
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
-        Optional optJob = jobRepository.findById(jobId);
+        Optional<Job> optJob = jobRepository.findById(jobId);
         if (optJob.isPresent()) {
-            Job job = (Job) optJob.get();
+            Job job = optJob.get();
             model.addAttribute("job", job);
-            return "job/view";
+            return "view";
         } else {
             return "redirect:/";
         }
     }
-
-
 }
+
+
